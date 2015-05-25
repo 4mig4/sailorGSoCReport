@@ -1,0 +1,86 @@
+\documentclass{article}
+\title{Sailor GSoC Report}
+\date{May 25th 2015}
+\author{Etiene Dalcol}
+\usepackage[backend=bibtex,style=verbose-trad2]{biblatex}
+\bibliography{main} 
+\begin{document}
+	\pagenumbering{gobble}
+	\maketitle
+
+	\newpage
+	\tableofcontents
+
+	\newpage
+	\pagenumbering{arabic}
+	
+	\section{Introduction}
+	
+	Lua is greatly used in embedded systems but it's also excellent as a general purpose language. Its use in web development, for example, could be more widespread. Sailor is a web MVC framework completely written in Lua that allows to write robust web systems using Lua programming language. It's in early development stage with three releases under MIT License. It currently runs on the top of various web servers, such as Apache2, NginX, Mongoose, Lwan and Xavante. It's compatible with different operational systems, such as Linux, Mac and Windows although Linux and Mac are more well-supported. 
+	\\\\
+	During this program I will be working mainly on the following activies:	
+	
+	 \begin{enumerate}
+	  \item Implementing a test suite
+	  \item Improving the usability of Lua at the client side
+		\end{enumerate}
+	The results would significantly increase the overall quality and usability of Sailor. Plus, I really believe its participation in GSoC would be very beneficial for both Sailor as a project and for the Lua community as it introduces some fresh blood into our current situation of the use of Lua in web development and could allow it to get more traction. 
+
+		\subsection{Schedule}
+
+		\begin{description}
+	  \item[May 25th - June 5th] \hfill \\
+	  Researching how other frameworks use their test suites
+	  \item[June 6th - June 15th] \hfill \\
+	  Researching and testing existent test Lua modules
+	  \item[June 16th - July 1st] \hfill \\
+	  Either integrating an existing test module with Sailor or developing a new one
+	  \item[July 2nd - July 16th] \hfill \\
+	  Testing, bug fixing and documenting
+			\item[July 17th - July 23rd] \hfill \\
+	  Researching and testing Lua to JavaScript VMs. E.g. MoonshineJS
+			\item[July 24th - August 6th] \hfill \\
+	  Improving current way to manipulate DOM from Lua and load Lua modules to be used on client side.
+			\item[August 7th - August 16th] \hfill \\
+	  Testing, bug fixing and documenting
+			\item[August 17th - August 21st] \hfill \\
+	  Polishing and making sure nothing was missed
+		\end{description}
+		
+	\section{Section}
+		\subsection{Subsection}
+
+			Structuring a document is easy! \autocite[97]{johnsbook}
+
+		\subsubsection{Subsubsection}
+
+			More text. \autocite{VELLAGE:1}
+
+			\paragraph{Paragraph}
+
+				Some more text. \\ %linebreak
+
+				\subparagraph{Subparagraph}
+
+					Even more text.
+
+	\newpage
+	\section{Another section}
+
+	\newpage
+
+
+	\printbibheading[title={References},heading=bibnumbered]
+	\printbibliography[title={Books},type=book,heading=subbibnumbered]
+	\printbibliography[title={Articles},type=article,heading=subbibnumbered]
+
+	\newpage
+	\section{Appendix}
+	\begin{appendix}
+	%\addcontentsline{toc}{subsection}{List of Figures}
+	 \listoffigures
+	 % \addcontentsline{toc}{subsection}{List of Tables}
+  \listoftables
+	\end{appendix}
+
+\end{document}
