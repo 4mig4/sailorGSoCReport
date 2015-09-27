@@ -3,13 +3,15 @@
 \title{Sailor GSoC Report}
 \date{May 25th 2015}
 \author{Etiene Dalcol}
+\usepackage[backend=bibtex,style=verbose-trad2]{biblatex}
+\usepackage{graphicx}  
+\usepackage[a4paper, total={6in, 8in}]{geometry}
 \usepackage[table,xcdraw]{xcolor}
 \usepackage{listings}   
-\usepackage{hyperref}
+\usepackage{hyperref} 
+\usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage[backend=bibtex,style=verbose-trad2]{biblatex}
-\usepackage{graphicx}
-\usepackage[a4paper, total={6in, 8in}]{geometry}       
+\usepackage{lmodern} 
 \bibliography{main} 
 \begin{document}
 	\pagenumbering{gobble}
@@ -57,7 +59,9 @@ Etiene \textsc{da Cruz Dalcol} % Your name
 \emph{Supervisor:} \\
 Dr. Olivier \textsc{Reynet} % Supervisor's Name
 \end{flushright}
-\end{minipage}\\[1.5cm]
+\end{minipage}\\[1.1cm]
+
+ \textit{A report submitted in fulfilment of the requirements\\ for the degree of Master of Engineering in Software Engineering}\\[1.1cm]
 
 % If you don't want a supervisor, uncomment the two lines below and remove the section above
 %\Large \emph{Author:}\\
@@ -67,7 +71,7 @@ Dr. Olivier \textsc{Reynet} % Supervisor's Name
 %	DATE SECTION
 %----------------------------------------------------------------------------------------
 
-{\large \today}\\[3cm] % Date, change the \today to a set date if you want to be precise
+{\large \today}\\[1cm] % Date, change the \today to a set date if you want to be precise
 
 %----------------------------------------------------------------------------------------
 %	LOGO SECTION
@@ -84,28 +88,38 @@ Dr. Olivier \textsc{Reynet} % Supervisor's Name
 
 \end{titlepage}
 
+\null\newpage
 
-
-
-	\newpage
-	\tableofcontents
-
-	\newpage
-	\pagenumbering{arabic}
-
-	\section{Abstract}
+\pagenumbering{roman}
+	\section*{Abstract}
 
 Lua is a very fast and powerful scripting language that can be easily embeddable. For that reason, it has gained a niche in the game development industry. Lua has great potential and incredible benchmarks. Despite being also an excellent tool as a general purpose language to develop robust applications, its use in web developments needs to be more widespread. \\
 
 Sailor was invented to increase the ecosystem of web development in Lua but it is still in early development. The purpose of this work is to turn Sailor into a more mature software by adding new features and improving existing ones such as adding automated tests and improving the use of Lua instead of Javascript when programming for the browser. 
 
-	\subsection*{Resumé}\\
+	\section*{Resumé}\\
+
 Lua est un langage très rapide et puissant qui peut être embarqué facilement. Pour cette raison, il a gagné une place importante dans l'industrie de développement de jeux. Lua a des potentiels et benchmarks incroyables. En dépit d'être aussi un excellent outil en tant que langue d'usage général pour développer des applications robustes, son utilisation dans le développement web devrait être plus généralisée.\\
 
 Sailor a été inventé pour augmenter l'écosystème du développement web en Lua, mais il est encore dans un stage de développement précoce. Le but de ce travail est de transformer Sailor dans un logiciel plus mature en ajoutant de nouvelles fonctionnalités et l'amélioration de ceux existants, tels que l'ajout de tests automatisés et d'amélioration de l'utilisation de Lua lieu de Javascript lors de la programmation pour le navigateur.
 
+\null\newpage
+\null\newpage
 
-	\newpage
+
+\section*{Acknowledgement}
+
+\null\newpage
+\null\newpage
+
+
+	\tableofcontents
+
+\null\newpage
+\null\newpage
+
+	\pagenumbering{arabic}
+
 	
 	\section{Introduction}
 
@@ -736,7 +750,7 @@ This report was composed with LaTeX and the source code to this report can be fo
 %\printbibheading[title={References},heading=bibnumbered]
 \section{References}
 	\printbibliography[title={Books},type=book,heading=subbibnumbered]
-	\printbibliography[title={Articles},type=article,heading=subbibnumbered]
+	\printbibliography[title={Presentations},type=article,heading=subbibnumbered]
 	\printbibliography[title={Websites},type=misc,heading=subbibnumbered]
 
 	\newpage

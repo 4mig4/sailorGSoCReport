@@ -1,25 +1,25 @@
-\BOOKMARK [1][-]{section.1}{Abstract}{}% 1
-\BOOKMARK [1][-]{section.2}{Introduction}{}% 2
-\BOOKMARK [2][-]{subsection.2.1}{Google Summer of Code}{section.2}% 3
-\BOOKMARK [2][-]{subsection.2.2}{LabLua}{section.2}% 4
-\BOOKMARK [2][-]{subsection.2.3}{The Lua programming language}{section.2}% 5
-\BOOKMARK [1][-]{section.3}{Analysis of the problem}{}% 6
-\BOOKMARK [2][-]{subsection.3.1}{The Lua ecosystem}{section.3}% 7
-\BOOKMARK [3][-]{subsubsection.3.1.1}{General ecosystem}{subsection.3.1}% 8
-\BOOKMARK [3][-]{subsubsection.3.1.2}{Web servers supported}{subsection.3.1}% 9
-\BOOKMARK [3][-]{subsubsection.3.1.3}{Existing tools and frameworks}{subsection.3.1}% 10
-\BOOKMARK [1][-]{section.4}{Proposal}{}% 11
-\BOOKMARK [2][-]{subsection.4.1}{The Summer Project Proposal}{section.4}% 12
-\BOOKMARK [2][-]{subsection.4.2}{Proposed development schedule}{section.4}% 13
-\BOOKMARK [1][-]{section.5}{The development}{}% 14
-\BOOKMARK [2][-]{subsection.5.1}{Implementing a test suite}{section.5}% 15
-\BOOKMARK [3][-]{subsubsection.5.1.1}{Busted integration}{subsection.5.1}% 16
-\BOOKMARK [3][-]{subsubsection.5.1.2}{Running tests}{subsection.5.1}% 17
-\BOOKMARK [2][-]{subsection.5.2}{Improving the usability of Lua at the client side}{section.5}% 18
-\BOOKMARK [2][-]{subsection.5.3}{Development method and tools}{section.5}% 19
-\BOOKMARK [1][-]{section.6}{Results}{}% 20
-\BOOKMARK [1][-]{section.7}{Conclusion}{}% 21
-\BOOKMARK [1][-]{section.8}{References}{}% 22
-\BOOKMARK [2][-]{subsection.8.1}{Books}{section.8}% 23
-\BOOKMARK [2][-]{subsection.8.2}{Websites}{section.8}% 24
-\BOOKMARK [1][-]{section.9}{Appendix}{}% 25
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [2][-]{subsection.1.1}{Google Summer of Code}{section.1}% 2
+\BOOKMARK [2][-]{subsection.1.2}{LabLua}{section.1}% 3
+\BOOKMARK [2][-]{subsection.1.3}{The Lua programming language}{section.1}% 4
+\BOOKMARK [1][-]{section.2}{Analysis of the problem}{}% 5
+\BOOKMARK [2][-]{subsection.2.1}{The Lua ecosystem}{section.2}% 6
+\BOOKMARK [3][-]{subsubsection.2.1.1}{General ecosystem}{subsection.2.1}% 7
+\BOOKMARK [3][-]{subsubsection.2.1.2}{Web servers supported}{subsection.2.1}% 8
+\BOOKMARK [3][-]{subsubsection.2.1.3}{Existing tools and frameworks}{subsection.2.1}% 9
+\BOOKMARK [1][-]{section.3}{Proposal}{}% 10
+\BOOKMARK [2][-]{subsection.3.1}{The Summer Project Proposal}{section.3}% 11
+\BOOKMARK [2][-]{subsection.3.2}{Proposed development schedule}{section.3}% 12
+\BOOKMARK [1][-]{section.4}{The development}{}% 13
+\BOOKMARK [2][-]{subsection.4.1}{Implementing a test suite}{section.4}% 14
+\BOOKMARK [3][-]{subsubsection.4.1.1}{Busted integration}{subsection.4.1}% 15
+\BOOKMARK [3][-]{subsubsection.4.1.2}{Running tests}{subsection.4.1}% 16
+\BOOKMARK [2][-]{subsection.4.2}{Improving the usability of Lua at the client side}{section.4}% 17
+\BOOKMARK [2][-]{subsection.4.3}{Development method and tools}{section.4}% 18
+\BOOKMARK [1][-]{section.5}{Results}{}% 19
+\BOOKMARK [1][-]{section.6}{Conclusion}{}% 20
+\BOOKMARK [1][-]{section.7}{References}{}% 21
+\BOOKMARK [2][-]{subsection.7.1}{Books}{section.7}% 22
+\BOOKMARK [2][-]{subsection.7.2}{Presentations}{section.7}% 23
+\BOOKMARK [2][-]{subsection.7.3}{Websites}{section.7}% 24
+\BOOKMARK [1][-]{section.8}{Appendix}{}% 25
