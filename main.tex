@@ -3,6 +3,7 @@
 \title{Sailor GSoC Report}
 \date{May 25th 2015}
 \author{Etiene Dalcol}
+\usepackage[table,xcdraw]{xcolor}
 \usepackage{listings}   
 \usepackage{hyperref}
 \usepackage[T1]{fontenc}
@@ -537,10 +538,133 @@ There should be an output like this:
 
 
 
+\subsection{Improving the usability of Lua at the client side}
+
+As of version 0.3 Sailor applications were shipped with a Lua-to-Javascript virtual machine called Lua5.1.js\autocite{lua51js} developed by Alexander Gladysh. This integration needed a major rework for two main reasons:\\
+
+\begin{enumerate}\item The JavaScript bridge is not part of the VM. It was developed separately by a contributor when it was integrated with Sailor and it was incomplete. Some basic JS functions were missing. This was an issue because it did not allow for a very good DOM manipulation using Lua and because I did not want Sailor to be responsible for keeping this bridge updated. 
+
+\item It was virtually impossible to use the Lua require function on the client. This was an issue because it went against the goal of sharing existent Lua libraries, which made enabling Lua to the run on the browser basically useless. It was possible, but to do it the Lua library needed to be copied to the root of the app and manually mapped in a JavaScript file, which was a huge hassle, a lot of work and did not work on the go. Later on, a contributor added a function that would serve a Lua file on a required path for it to be loaded by the virtual machine. However, this modification only worked on applications who ran on Apache server. This means this functionality was a mess and needed to be simplified. 
+\end{enumerate}\\
+
+Looking for alternatives, an interesting option appeared. It's called Moonshine\autocite{moonshine} and was developed by Paul Cuthbertson while he worked at Gamesys. Moonshine is a lightweight Lua VM for the browser with a wonderfully built JS bridge that not only works nicely for manipulating the DOM but it is also able to communicate well with JavaScript libraries, such as JQuery. \\
+
+Moonshine does not accept code strings, but Lua bytecode, which meant that the Lua files needed to be manually pre-compiled. Fortunately, Lua is able to compile itself and this issue was circumvented by using the a combination of the loadstring() and the string.dump() functions on the Lua code read from the view files.\\
+
+\begin{lstlisting}[frame=single]
+s = string.dump(assert(loadstring(s)))
+\end{lstlisting}\\
+
+Moonshine, however, had an issue with requiring Lua modules. It was also necessary that the file was previously pre-compiled and made available at the application's directory. It was a smaller hassle than Lua5.1.js because it did not needed to be manually mapped in a JS file, but it was still inconvenient. Fortunately, when contacting Moonshine's support, Cuthbertson was very helpful and provided a new functionality in Moonshine, which allowed bytecode to be loaded by vm.preload() function. With this in hands, Sailor could now automatically look for the library on its package.path, load it, convert to bytecode and send to the virtual machine.\\
+
+Examples:\\
+
+\begin{enumerate}\item Manipulation of the DOM\\
+
+\begin{lstlisting}[frame=single]
+<div id="app"></div>
+<?lua@client
+
+local app = window.document:getElementById('app')
+print(app.textContent)
+app.textContent = 'lets go'
+
+window:alert('This code was written in Lua')
+
+?>
+\end{lstlisting}\\
+
+\item Accessing Javascript functions and passing callbacks\\
+
+\begin{lstlisting}[frame=single]
+<script>
+function myJSFunction(msg){
+    console.log(msg);
+}
+
+function myJSFunctionReceivesCallback(callback){
+    callback();
+}
+</script>
+
+<?lua@client
+window:myJSFunction('Calling a Javascript function from Lua')
+
+local function lua_callback()
+    print('This is printed from a Lua function being called in JS')
+end
+
+window:myJSFunctionReceivesCallback(callback)
+
+?>
+\end{lstlisting}\\
+
+\item Exporting Lua modules to the browser\\
+
+Remember that this code will run on the browser and some Lua modules won't make sense being used in this context! Attention: this feature is still under tests.\\
+
+\begin{lstlisting}[frame=single]
+<?lua@client
+local valua = require "valua"
+-- If you installed Sailor, valua, our valuation module
+--  was installed as a dependency
+
+local v = valua:new().len(3,10)
+print(v('Geronimo'))
+-- true
+?>
+\end{lstlisting}\\
+
+\item Accessing Javascript modules such as JQuery\\
+
+\begin{lstlisting}[frame=single]
+<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<script>
+function JQObj(s){
+    return $(s);
+    // This is necessary because the $() syntax will error on Lua
+}
+</script>
+
+<div id="app"></div>
+
+<?lua@client
+local app = window:JQObj('#app')
+app:html('This will be the new content of the div') 
+-- .html() is a JQuery function. 
+-- Please observe that in Lua we will use the ':' notation
+?>
+\end{lstlisting}
+\end{enumerate}
+
+After the implementation of the Moonshine integration, replacing the Lua5.1.js virtual machine, a new issue was found. Since Moonshine received bytecode and the bytecode was generated by the server side execution, the Lua version accepted by Moonshine needed to be the same as the one running on the server side. Moonshine is compatible with Lua 5.1 Even though code written in Lua 5.1 style can be interpreted by LuaJIT, this would still pose a problem. Unfortunately, LuaJIT based servers would generate a completely different bytecode, unacceptable on the virtual machine. LuaJIT is a very performant dialect of Lua and the default Lua version when running Sailor applications on the OpenResty distribution of Nginx. LuaJIT couldn't simply be left aside. \\
+
+Nonetheless, Cuthbertson was working on a new Lua-to-Javascript virtual machine called Starlight\autocite{starlight}. Starlight has all the benefits Moonshine has and accepts input code as simple strings to be loaded on the VM. When testing, however, it seemed to consume more memory. Seeing that not all Sailor users would run LuaJIT based servers, it was decided that Sailor should be compatible with multiple virtual machines to translate the Lua code. The developer is to be allowed to configure their applications to use their favorite VM. Even though it is in early development, as Starlight is the single VM that works on all situations needed by Sailor, it is the default. Later on, compatibility with another VM called Lua.vm.js\autocite{luavmjs} was also added. A comparison of all virtual machines supported by Sailor can be seen in the following table:
+\clearpage
+% Please add the following required packages to your document preamble:
+% \usepackage[table,xcdraw]{xcolor}
+% If you use beamer only pass "xcolor=table" option, i.e. \documentclass[xcolor=table]{beamer}
+\begin{table}[]
+\centering
+\caption{Comparison of the integrated Lua to JavaScript virtual machines}
+\label{my-label}
+\begin{tabular}{|l|c|c|c|c|}
+\hline                                                                                                                           & starlight                               & moonshine                               & lua51js                                          & luavmjs                                    \\ \hline
+\begin{tabular}[c]{@{}l@{}}The code is \\ pre-processed on the \\ server and bytecode is \\ sent to the JS VM\end{tabular} &                                         & \cellcolor[HTML]{34FF34}X               &                                                  &                                            \\ \hline
+\begin{tabular}[c]{@{}l@{}}The code is sent as a \\ string to the JS VM\end{tabular}                                       & \cellcolor[HTML]{34FF34}X               &                                         & \cellcolor[HTML]{34FF34}{\color[HTML]{333333} X} & \cellcolor[HTML]{34FF34}X                  \\ \hline
+\begin{tabular}[c]{@{}l@{}}Compatible Lua version \\ of the client written code\end{tabular}                               & 5.1                                     & 5.1                                     & 5.1                                              & 5.2.3                                      \\ \hline
+\begin{tabular}[c]{@{}l@{}}Works with Sailor on \\ LuaJIT based servers, \\ such as openresty\end{tabular}                 & \cellcolor[HTML]{34FF34}X               &                                         & \cellcolor[HTML]{34FF34}X                        & \cellcolor[HTML]{34FF34}X                  \\ \hline
+DOM manipulation                                                                                                           & \cellcolor[HTML]{34FF34}X               & \cellcolor[HTML]{34FF34}X               & \cellcolor[HTML]{F8FF00}incomplete               & \cellcolor[HTML]{34FF34}X                  \\ \hline
+\begin{tabular}[c]{@{}l@{}}Can require Lua\\ modules\end{tabular}                                                          & \cellcolor[HTML]{34FF34}X               & \cellcolor[HTML]{34FF34}X               & \cellcolor[HTML]{F8FF00}Only on Apache           &                                            \\ \hline
+\begin{tabular}[c]{@{}l@{}}Can send call JS \\ functions and send Lua \\ callbacks\end{tabular}                            & \cellcolor[HTML]{34FF34}X               & \cellcolor[HTML]{34FF34}X               &                                                  & \cellcolor[HTML]{34FF34}X                  \\ \hline
+\begin{tabular}[c]{@{}l@{}}How to print "hi" to \\ the console\end{tabular}                                                & print('hi')                             & print('hi')                             & js.console.log('hi')                             & print('hi')                                \\ \hline
+\begin{tabular}[c]{@{}l@{}}How to pop an alert \\ message with "hi"\end{tabular}                                           & \multicolumn{1}{l|}{window:alert('hi')} & \multicolumn{1}{l|}{window:alert('hi')} & \multicolumn{1}{l|}{js.window.alert('hi')}       & \multicolumn{1}{l|}{js.global:alert('hi')} \\ \hline
+\end{tabular}
+\end{table}
 
 
-
-	\newpage
+\clearpage
+\newpage
 
 %\printbibliography
 %\printbibheading[title={References},heading=bibnumbered]
