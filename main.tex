@@ -168,7 +168,7 @@ Its power can be observed on its multi-paradigm extensible semantics and speed. 
 %\clearpage
 \begin{figure}[h]
 \includegraphics[scale=0.4]{speed.png}
-\caption{\label{fig:speedcomparison} Speed comparison of popular script languages (less is better)}
+\caption{\label{fig:speedcomparison} Speed comparison of popular languages (less is better)}
 \end{figure}
 
 	\newpage
@@ -203,7 +203,7 @@ Despite being a successful 20-year old language, Lua's community and amount of l
 All these efforts have been producing results and the ecosystem is growing steadily\autocite{luarockspresentation}: \\
 \begin{figure}[h]
 \centering\includegraphics[scale=0.5]{luamodules.png}
-\caption{\label{fig:luamodules} Recent growth of the repository}
+\caption{\label{fig:luamodules} Recent growth of the Lua repository}
 \end{figure}
 
 \subsubsection{Web servers supported}
@@ -661,6 +661,72 @@ DOM manipulation                                                                
 \begin{tabular}[c]{@{}l@{}}How to pop an alert \\ message with "hi"\end{tabular}                                           & \multicolumn{1}{l|}{window:alert('hi')} & \multicolumn{1}{l|}{window:alert('hi')} & \multicolumn{1}{l|}{js.window.alert('hi')}       & \multicolumn{1}{l|}{js.global:alert('hi')} \\ \hline
 \end{tabular}
 \end{table}
+
+
+\subsection{Development method and tools}
+
+An specific development methodology was not adopted during this project. However, some practices and organisational tools often used in said methodologies were used, such as a kanban board\autocite{kanban}. A kanban board is essentially a board with post-its where each post-it is a task that moves across the board as its context change in the development process.\\ 
+
+\clearpage
+\begin{figure}[h]
+\centering\includegraphics[scale=0.4]{kanban.jpg}
+\caption{\label{fig:kanban} Physical Kanban Board used}
+\end{figure}
+
+Other tools and software used worth mentioning: \\
+
+\begin{enumerate}\item Sublime text\autocite{sublime} - text editor
+\item Git\autocite{git} - version control tool
+\item Github\autocite{github} - public repository
+\item Google Chrome - browser
+\item Postman extension for Google Chrome\autocite{postman} - for sending HTTP requests during tests
+\item Pomodoro timer extension for Google Chrome\autocite{pomodoro} - a timer for workflow
+\end{enumerate}\\
+
+During all the development, the calendar proposed at the beginning of the project was used as a reference point for creating the tasks. The complete history of modifications can be seen at github (\url{https://github.com/Etiene/sailor/commits/master}), which serves as another organizational tool.\\
+
+\begin{figure}[h]
+\centering\includegraphics[scale=0.5]{github.png}
+\caption{\label{fig:github} How github shows modification history}
+\end{figure}
+
+\clearpage
+\newpage
+
+\section{Results}
+
+While developing the test module for Sailor, a number of bugs were discovered and corrected within the framework such as inconsistencies on status codes, routing and headers handling across different web servers and data not being attributed with the correct type when being fetched by the database. A refactor was also necessary on the access and login modules of Sailor, to allow logging in users during tests and test in different session contexts.\\
+
+The implementation of the test suite followed with success and a new version of Sailor was released: version 0.4 Jupiter.  \\
+
+During the integration of Sailor with the new Lua-to-JavaScript virtual machines some bugs were discovered and corrected when launching applications using OpenResty. The integration was implemented with success. However, a new version of Sailor was not released yet. Version 0.5 (Pluto) is being prepared to be released soon because, ideally, it will contain more features other than the integrations with the VMs and these bug corrections.\\
+
+Some of the features and corrections being studied to be added on next versions of Sailor are:\\
+
+\begin{enumerate}\item A refactor on handling of friendly URLs to fix inconsistencies among web servers
+\item Using OpenResty's own database API instead of LuaSQL to avoid blocking system calls
+\item Supporting transactions
+\item Improvements on running Sailor over Lighttpd server
+\end{enumerate}
+
+The final term evaluation of Google Summer of Code was completed with success and the patches with the code developed during summer were submitted to GSoC's web page.\\
+
+The source code of Sailor, along with the recent patches, can be found at \url{https://github.com/Etiene/sailor}.\\
+
+Sailor's website, documentation, extension repository and reference manual can be found at \url{http://sailorproject.org}.
+
+\newpage
+
+\section{Conclusion}
+
+From a project's perspective, the results obtained during this summer's developments brought a considerable improvement to Sailor applications. Not only applications will now have a higher quality since they can be automatically tested, but also users comfortable with Lua may use it instead of JavaScript without loss of features.\\
+
+In relation to the career gain as a student, the project was also a success. It greatly enlarged my knowledge of software testing practices, improved my programming abilities and brought me more experience on working with open source, which included my first legal issue on this matter. One of the key aspects of Sailor is that it is open source, and so I had to carefully study license issues and its relation to laws of intellectual property in France to ensure that the MIT license was maintained safely. \\
+
+Other interesting aspects were the responsibility of managing the project development. Even under one mentor and one supervisor who were offering technical and administrative assistance, Sailor was still my project and my responsibility. I had to make design decisions, carefully enumerate all tasks, estimate duration for completion and, the hardest, have the discipline to organize myself on my own time schedule. The fact that Sailor is a serious project for use on the real world also implies that I needed to take care of even broader functions, such as writing documentation, interacting with announcements on social medias and providing user support. This means that the maturity Sailor gained as a project during the summer directly reflected on the maturity I gained as a developer during the same period.\\
+
+This report was composed with LaTeX and the source code to this report can be found at \url{https://github.com/Etiene/sailorGSoCReport}.
+
 
 
 \clearpage
