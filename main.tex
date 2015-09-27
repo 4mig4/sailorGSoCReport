@@ -3,6 +3,7 @@
 \title{Sailor GSoC Report}
 \date{May 25th 2015}
 \author{Etiene Dalcol}
+\usepackage{hyperref}
 \usepackage[T1]{fontenc}
 \usepackage[backend=bibtex,style=verbose-trad2]{biblatex}
 \usepackage{graphicx}
@@ -167,6 +168,94 @@ Its power can be observed on its multi-paradigm extensible semantics and speed. 
 \includegraphics[scale=0.4]{speed.png}
 \caption{\label{fig:speedcomparison} Speed comparison of popular script languages (less is better)}
 \end{figure}
+
+\section{Analysis of the problem}
+
+Lua is greatly used as an embedded language and has found a niche in game development being the top language of choice for scripting in this area\autocite{engine}. In the same time, it is still a great tool as a general purpose language but not much widespread in other domains such as web development. As of September 26th of 2015 Lua is used in less than 0.1\% of websites whose server-side programming language we know\autocite{w3server}. \\
+
+\begin{figure}[h]
+\centering\includegraphics[scale=0.7]{serverlangs.png}
+\caption{\label{fig:serverlangs} Usage of server-side programming languages for websites. Note: a website may use more than one server-side programming language}
+\end{figure}
+
+In an attempt to understand why this happens, I made an analysis of the context of the top used language: PHP. One may argue that PHP is not such a well-designed language. Then why is it the top language of choice for web development? Why is 82\% of the web made of PHP websites? We could speculate that PHP's success is due to a good timing but, 20 years later, allegedly better programming languages have appeared and PHP's popularity continues to grow\autocite{phptime}.\\
+
+\clearpage
+\begin{figure}[h]
+\centering\includegraphics[scale=0.7]{serverlangstime.png}
+\caption{\label{fig:serverlangstime} Historical yearly trends in the usage of server-side programming languages for websites}
+\end{figure}
+
+
+This is what Jeff Atwood, stackoverflow co-founder, calls "The PHP singularity"\autocite{phpsing}. According to him, the faults of PHP don't matter because it has a huge ecosystem and easy deployment and the only solution to this is to build compelling alternatives who are as pervasive and as easy to setup and use. In his blog, he calls out the community of programmers to push other options forward.\\
+
+Having some knowledge of the PHP ecosystem as a beginner and intermediate user, I considered this an interesting challenge. As Lua is a well-designed, fast and easy-to-learn language, I believe it is a perfect candidate for the job in terms of quality. But how about it's ecosystem?\\
+
+\subsection{The Lua ecosystem}
+
+\subsubsection{General ecosystem}
+
+Despite being a successful 20-year old language, Lua's community and amount of libraries is small. This is an issue that is being addressed, specially in the recent years. The Kepler Project\autocite{kepler} (2006-2009) was a project developed with the goal to make a platform for web development in Lua\autocite{cgilua}. While it did not accomplish its ultimate goal, it produced some of the modules that were essential for the later development of the ecosystem. One of these modules that deserves a highlight is LuaRocks\autocite{luarocks}, developed by Hisham Muhammad to deploy Kepler modules. LuaRocks is now the package manager for Lua modules, acting as a one-stop repository that significantly reduced the entry barrier for Lua as an application development language. Pierre Chapuis, in his 2013 talk "State of the Lua Ecosystem"\autocite{luaeco} suggested modules should be even easier to find. He created a website called Lua toolbox\autocite{luatoolbox}, aimed at ranking, endorsing and classification of Lua modules. In the meantime, MoonRocks, a tool aimed at easy uploading and hosting of modules\autocite{moonrocks} was created by Leaf Corcoran, also in 2013. This project has recently merged with LuaRocks. \\
+
+All these efforts have been producing results and the ecosystem is growing steadily\autocite{luarockspresentation}: \\
+\begin{figure}[h]
+\centering\includegraphics[scale=0.5]{luamodules.png}
+\caption{\label{fig:luamodules} Recent growth of the repository}
+\end{figure}
+
+\subsubsection{Web servers supported}
+
+Lua can run on a variety of web servers. Apache has a module to run lua called mod\_lua, Nginx has a distribution called open resty that allows to run Lua too. This is great news, because they are the top two web servers used\autocite{webservers}. There’s Xavante, which is a web server written in Lua and allows a really quick deploy, as well as plenty of others options like Mongoose, Lwan or Lighttpd. 
+\begin{figure}[h]
+\centering\includegraphics[scale=0.7]{webservers.png}
+\caption{\label{fig:webservers} Usage of web servers for websites}
+\end{figure}
+
+\subsubsection{Existent tools and frameworks}
+
+\textbf{Orbit:} \\
+
+Orbit is the longest established framework the Lua community has, but it's not in active development anymore. It's very lightweight and follows an MVC architecture. \\
+
+Can be installed through LuaRocks: Yes\\
+
+Documentation: Very succinct but sufficient\\
+
+License: GPL\\
+
+Website: \url{http://keplerproject.github.io/orbit/}\\
+
+\textbf{Luvit:}\\
+
+Luvit adopts a different kind of approach from Orbit. It's designed to be a port of Node.js to Lua. It accomplishes this task very well, claiming to be 2 to 4 times more performant and making great memory savings. However, for those that are not already proficient in writing applications with Node.js, it can be very complex to use as its documentation is not yet prepared to receive full beginners in the web development world. It's very powerful, it's in intense development and it is maybe the most popular Lua web development framework, but still very little known outside the community.\\
+
+Can be installed through LuaRocks: No\\
+
+Documentation: Insufficient\\
+
+License: Apache 2.0\\ 
+
+Website: \url{https://luvit.io/}\\ 
+
+\textbf{Lapis:}\\
+
+Lapis is a very interesting framework. It's not exactly in Lua, but in MoonScript, a language that compiles to Lua like CoffeeScript compiles to JavaScript. You can still, however, use Lua to write your application. It's in very active development by a dedicated maintainer. It does not provide an MVC architecture out of the box but it's possible to prototype one. \\
+
+Can be installed through LuaRocks: Yes\\ 
+
+Documentation: Extensive and informative\\
+
+License: MIT\\
+
+Website: \url{http://leafo.net/lapis/}\\
+
+\textbf{Other projects worth mentioning:}\\
+
+TurboLua | Apache 2.0: \url{http://www.turbolua.org/} \\
+
+Tir | BSD: \url{http://tir.mongrel2.org/} \\
+
+Ophal | AGPL 3.0: \url{http://ophal.org/} \\
 
 
 
