@@ -3,6 +3,7 @@
 \title{Sailor GSoC Report}
 \date{May 25th 2015}
 \author{Etiene Dalcol}
+\usepackage{listings}   
 \usepackage{hyperref}
 \usepackage[T1]{fontenc}
 \usepackage[backend=bibtex,style=verbose-trad2]{biblatex}
@@ -22,7 +23,7 @@
 %	HEADING SECTIONS
 %----------------------------------------------------------------------------------------
 
-\textsc{\LARGE École Nationale Supérieure de Techniques Avancées Bretagne}\\[0.5cm] % Name of your university/college
+\textsc{\LARGE Ã‰cole Nationale SupÃ©rieure de Techniques AvancÃ©es Bretagne}\\[0.5cm] % Name of your university/college
 \includegraphics[scale=0.15]{enstalogo.jpg}\\[0.5cm]
 \textsc{\Large Summer Internship Report}\\[0.5cm] % Major heading such as course name
 \textsc{\large Web development in Lua programming language}\\[0.5cm] % Minor heading such as course title
@@ -97,10 +98,10 @@ Lua is a very fast and powerful scripting language that can be easily embeddable
 
 Sailor was invented to increase the ecosystem of web development in Lua but it is still in early development. The purpose of this work is to turn Sailor into a more mature software by adding new features and improving existing ones such as adding automated tests and improving the use of Lua instead of Javascript when programming for the browser. 
 
-	\subsection*{Resumé}\\
-Lua est un langage très rapide et puissant qui peut être embarqué facilement. Pour cette raison, il a gagné une place importante dans l'industrie de développement de jeux. Lua a des potentiels et benchmarks incroyables. En dépit d'être aussi un excellent outil en tant que langue d'usage général pour développer des applications robustes, son utilisation dans le développement web devrait être plus généralisée.\\
+	\subsection*{ResumÃ©}\\
+Lua est un langage trÃ¨s rapide et puissant qui peut Ãªtre embarquÃ© facilement. Pour cette raison, il a gagnÃ© une place importante dans l'industrie de dÃ©veloppement de jeux. Lua a des potentiels et benchmarks incroyables. En dÃ©pit d'Ãªtre aussi un excellent outil en tant que langue d'usage gÃ©nÃ©ral pour dÃ©velopper des applications robustes, son utilisation dans le dÃ©veloppement web devrait Ãªtre plus gÃ©nÃ©ralisÃ©e.\\
 
-Sailor a été inventé pour augmenter l'écosystème du développement web en Lua, mais il est encore dans un stage de développement précoce. Le but de ce travail est de transformer Sailor dans un logiciel plus mature en ajoutant de nouvelles fonctionnalités et l'amélioration de ceux existants, tels que l'ajout de tests automatisés et d'amélioration de l'utilisation de Lua lieu de Javascript lors de la programmation pour le navigateur.
+Sailor a Ã©tÃ© inventÃ© pour augmenter l'Ã©cosystÃ¨me du dÃ©veloppement web en Lua, mais il est encore dans un stage de dÃ©veloppement prÃ©coce. Le but de ce travail est de transformer Sailor dans un logiciel plus mature en ajoutant de nouvelles fonctionnalitÃ©s et l'amÃ©lioration de ceux existants, tels que l'ajout de tests automatisÃ©s et d'amÃ©lioration de l'utilisation de Lua lieu de Javascript lors de la programmation pour le navigateur.
 
 
 	\newpage
@@ -146,7 +147,7 @@ LabLua proposed the following list of ideas to GSoC:
 \item Multi-CPU usage in wireshark
 \item Develop a binary serialization format with support for dynamically types values and an RPC protocol for dynamically typed invocations based on this format.
 \item Develop a library for Lua that allows Lua programs to access features provided by the platform's underlying operating system (OS) kernel, such as process control, network access, file system, event notification, etc.
-\item Port an SDL-based C++ open source game to Céu
+\item Port an SDL-based C++ open source game to CÃ©u
 \end{enumerate}
 
 They received in total 6 slots, from which, four of them were filled by students working on ideas 2, 3, 7 and 13 and two of them were ideas proposed by students themselves. One of the student-proposed ideas was my project to improve Sailor, a web development framework I had been developing on my free time. \\
@@ -169,6 +170,7 @@ Its power can be observed on its multi-paradigm extensible semantics and speed. 
 \caption{\label{fig:speedcomparison} Speed comparison of popular script languages (less is better)}
 \end{figure}
 
+	\newpage
 \section{Analysis of the problem}
 
 Lua is greatly used as an embedded language and has found a niche in game development being the top language of choice for scripting in this area\autocite{engine}. In the same time, it is still a great tool as a general purpose language but not much widespread in other domains such as web development. As of September 26th of 2015 Lua is used in less than 0.1\% of websites whose server-side programming language we know\autocite{w3server}. \\
@@ -205,13 +207,13 @@ All these efforts have been producing results and the ecosystem is growing stead
 
 \subsubsection{Web servers supported}
 
-Lua can run on a variety of web servers. Apache has a module to run lua called mod\_lua, Nginx has a distribution called open resty that allows to run Lua too. This is great news, because they are the top two web servers used\autocite{webservers}. There’s Xavante, which is a web server written in Lua and allows a really quick deploy, as well as plenty of others options like Mongoose, Lwan or Lighttpd. 
+Lua can run on a variety of web servers. Apache has a module to run lua called mod\_lua, Nginx has a distribution called open resty that allows to run Lua too. This is great news, because they are the top two web servers used\autocite{webservers}. Thereâ€™s Xavante, which is a web server written in Lua and allows a really quick deploy, as well as plenty of others options like Mongoose, Lwan or Lighttpd. 
 \begin{figure}[h]
 \centering\includegraphics[scale=0.7]{webservers.png}
 \caption{\label{fig:webservers} Usage of web servers for websites}
 \end{figure}
 
-\subsubsection{Existent tools and frameworks}
+\subsubsection{Existing tools and frameworks}
 
 \textbf{Orbit:} \\
 
@@ -257,9 +259,58 @@ Tir | BSD: \url{http://tir.mongrel2.org/} \\
 
 Ophal | AGPL 3.0: \url{http://ophal.org/} \\
 
+	\newpage
+\section{Proposal}
+
+As seen at the ecosystem analysis, while Lua already provides a set of libraries and tools for web development, none of them has reached a somewhat wide-spread use in the web development community. And while the Lua ecosystem seems to be flourishing nicely, this set is still considerably small comparing to the amount of tools offered in other programming languages. Having this in mind, I considered that building a new tool for web development in Lua was not a redundant task. As a follow-up to Atwood's call for action, I decided to push and advocate Lua as a promising platform and simply create more options. In the worst-case scenario I would learn a lot of things about the Lua programming language and about web development. \\
+
+This idea was the beginning of Sailor, a framework for fast development of web applications in Lua I started developing in 2014. In the same way as Lua, Sailor is free software and written under the MIT License. Its applications are structured in a model-view-controller (MVC) architecture. Like other web development frameworks, such as Ruby on Rails, it is designed to make the development process faster by making some assumptions and conventions (not requiring configuration for everything) and encouraging principles like DRY (Don't Repeat Yourself).\\
+
+Its ultimate goal is to be very easy to use while still being a high quality tool. Sailor offers many possibilities of setup to its users, can be used for building projects of any size in such a friendly language that is Lua and allows the use of Lua in the client-side (browser) as well, eliminating the use of JavaScript if desired.\\
+
+This last point is a really interesting aspect of this project. Writing code in Lua to run in the browser is allowed through an integration of Sailor with a Lua-to-Javascript virtual machine. While it will be less performant, there are other advantages. Usually, a beginner web developer needs to learn at least 4 types of languages for building a complete dynamic website, including those that are not considered programming languages: a server side language of choice, JavaScript for the client side, HTML / CSS and SQL. Being able to use the same language for both the server and the client side reduces the entry barrier and improves maintainability and reusability of the code. In addition to this, with the beginning of the development of Web Assembly\autocite{webassembly} in April 2015, the possibility to run Lua natively on browsers may be attained in the foreseeable future, which is very promising.\\
 
 
-		\subsection{Schedule}
+\textbf{Sailor Characteristics as of version 0.3 - Jupiter}\\
+
+Features: Routing, ORM, Validation, Themes and Layouts, Bootstrap integration, Sessions, Cookies, friendly URLs, auto generator of models and CRUDs, easy form module, Lua in the browser, LuaRocks setup\\
+
+Lua version compatibility: 5.1 and 5.2\\
+
+Operating Systems: Windows, Mac or Linux\\
+
+Web servers: Apache with mod\_lua, OpenResty distribution of Nginx, Xavante, Lwan ou Lighttpd.\\
+
+Databases: MySQL, PostgreSQL, SQLite and other databases supported by the LuaSQL library.\\
+
+Lua-to-JS virtual machine: Lua5.1.js (a 5.1 coding style is required for the client side)\\
+
+Dependencies:
+\begin{enumerate}\item lua >= 5.1, < 5.3
+\item datafile >= 0.1
+\item luafilesystem >= 1.6.2
+\item valua >= 0.2.2
+\item lbase64 >= 20120807
+\item cgilua >= 5.1.4, < 5.2
+\item xavante >= 2.3
+\item wsapi-xavante >= 1.6.1 
+\end{enumerate}\\
+
+Licence: MIT\\
+
+Website: \url{http://sailorproject.org}\\
+
+\subsection{The Summer Project Proposal}
+
+Sailor is a work in progress with a small codebase that is growing gradually. The project submitted to Google Summer of Code was focused on developing a new feature and improving an existing one: \\
+
+\begin{enumerate}\item Implementing a test suite
+\item Improving the usability of Lua at the client side
+\end{enumerate}\item \\
+
+The results would significantly increase the overall quality and usability of Sailor. In addition, Sailor's participation in GSoC could allow it to get more traction, which would be beneficial for both Sailor and the Lua community as it introduces some fresh blood into the current Lua web development scene. 
+
+\subsection{Proposed development schedule}
 
 		\begin{description}
 	  \item[May 25th - June 5th] \hfill \\
@@ -280,25 +331,214 @@ Ophal | AGPL 3.0: \url{http://ophal.org/} \\
 	  Polishing and making sure nothing was missed
 		\end{description}
 		
-	\section{Section}
-		\subsection{Subsection}
+\newpage
+\section{The development}
 
-			Structuring a document is easy! \autocite[97]{johnsbook}
+\subsection{Implementing a test suite}
 
-		\subsubsection{Subsubsection}
+Testing is a crucial part of software development. It is so important that there are development techniques that focus on that, such as Test-driven development (TDD). In TDD, first, an initially failing test for a function is written, and then a function that passes the test is developed. \\
 
-			More text. \autocite{VELLAGE:1}
+Writing tests is useful not only for assuring that the software does what it is meant to do, but also that it will still do what its meant in different environments, with different inputs, within a reasonable time. By writing automated tests, there's a documentation of which cases the software is being tested against and the tests can be rerun when changes are made to the software or the environment to ensure that the expected results are still obtained.\\
 
-			\paragraph{Paragraph}
+As of version 0.3 Jupiter, Sailor did not provide an easy functionality to write automated tests to its applications.\\
 
-				Some more text. \\ %linebreak
+The first step about implementing a test suite into Sailor was to investigate how this is done on different frameworks. A number of frameworks presented a functionality to test the applications made with them and insightful documentation such as Yii (PHP)\autocite{yiiguide} , Laravel (PHP)\autocite{laravel} , Lapis (Lua)\autocite{lapis} , Ruby on Rails (Ruby)\autocite{rails}  and Flask (Python)\autocite{flask} .\\
 
-				\subparagraph{Subparagraph}
+It was observed that the most common forms of application testing in web development had:\\
 
-					Even more text.
+\begin{enumerate}
+\item Fixtures: the ability to load sample data into a test database
+\item Unit tests: the ability to test very specific pieces of code such as model methods
+\item Functional tests, also called integration tests: the ability to test broader pieces of code and how they work together in the flux of the application use, such as the execution of a controller action
+\end{enumerate}\\
 
-	\newpage
-	\section{Another section}
+There was little to no variation in how unit tests were done but what was defined as their functional tests varied a lot. Some frameworks mocked up a request, some frameworks launched a test server and made actual HTTP requests. Some frameworks provided even more complex testing, in a third category, for deeply testing the interface and included, for example, the simulation of mouse clicks in a web page. \\
+
+For the purpose of this project, it was decided that mocking a request and executing Sailor's internal functions for running controller actions would be enough.\\
+
+Investigating if there were already libraries that provided tests in Lua was not difficult. There aren't many around. Busted\autocite{busted}  is one of the top Lua libraries used with this purpose, it is in active development and well maintained, so it seemed like an obvious choice. \\
+
+Before starting the integration of Sailor with Busted, some modifications to Sailor were necessary:\\
+
+\begin{enumerate}\item Multiple databases\\
+As of version 0.3, Sailor allowed the configuration of a database to be used by the application. This was changed to allow defining multiple database configurations and change environments to facilitate changing databases for testing.
+
+\item Validation toggle \\
+Normally, before saving a model, its attributes were validated. Now it is possible to turn off the validation if desired. This is useful for loading fixtures into the test database regardless if they are following the normal validation rules or not since testing with faulty inputs might be desired.
+model:save() -> model:save(validate)
+the default is true
+
+\item Adding count method to model \\
+This modification was not strictly necessary since the counting of entries in a table could be done manually, but this would facilitate making assertions and reduce the amount of code written for tests.
+
+\item Renaming and restructuring Sailor's binary\\
+When Sailor was installed, it installed a binary called sailor\_create, useful for rapidly creating new blank applications. Now that it would gain a new utility, it was renamed to simply sailor, being able to receive two commands: create and test.
+\end{enumerate}
+
+\lstset{language=Bash}    
+\begin{lstlisting}[frame=single]
+sailor create "My Application"
+cd my_application
+sailor test
+\end{lstlisting}
+
+
+\subsubsection{Busted integration}
+
+A new module was added to Sailor, called tests. As of now it contains two important functions:
+
+\lstset{language=Lua}    
+\begin{lstlisting}[frame=single]
+test.request(path, data, additional_headers)
+\end{lstlisting}
+
+Makes a mockup request to a certain path of a Sailor application.
+
+\begin{description}\item \textbf{path}: \textit{string}. The path you want to make a request to, such as a controller or controller/action. Example: 'user/view'
+\item \textbf{data}: \textit{table}. A table containing some data you want to send to the request, such as get or post. Example: {get = {id = 1}}
+\item \textbf{additional\_headers}: \textit{table}. A table containing additional headers you may want to send. Example: {ACCEPT = 'application/json'}
+\end{description}\\
+
+This function will return a result table with the following fields:\\
+\begin{description}\item \textbf{res.status}: \textit{number}. The status of the response.
+\item \textbf{res.body}: \textit{string}. The body of the response.
+\item \textbf{res.headers}: \textit{table}. Any headers out that were set.
+\item \textbf{res:redirected(path)}: \textit{function}. A function that receives an internal Sailor app path and sees if the request was redirected there.\\
+\end{description}\\
+
+\begin{lstlisting}[frame=single]
+test.load_fixtures(model_name)
+\end{lstlisting}
+Loads tests fixtures into the database.\\
+\textbf{model\_name}: \textit{string}. The name of the model to be loaded.\\
+Returns a table with the objects created.\\
+
+A new function was also added to the form module.
+\begin{lstlisting}[frame=single]
+form.ify(object)
+\end{lstlisting}
+\textbf{object}: Sailor model object.\\
+Returns a table of attributes of this model as they would be if sent via POST through a Sailor form. This is useful for mocking a POST request.  \\
+
+Sailor applications now will come with a new directory called tests. It is organised in the following structure:\\
+
+\begin{lstlisting}[frame=single]
+fixtures/
+unit/
+functional/
+bootstrap.lua
+helper.lua
+\end{lstlisting}\\\\
+
+The fixtures/ directory will contain the fixture files. In Sailor, they are Lua files with the same name as the respective models that they are testing. They must return a table with the sample data. It is important to note that loading the fixtures will truncate existing data so it is important to configure the separate database for running tests on /conf/conf.lua.\\
+
+Example fixture for testing an User model with two attributes, username and password:\\
+
+\begin{lstlisting}[frame=single]
+-- /tests/fixtures/user.lua
+
+return {
+    {
+        username = 'joao',
+        password = '123456'
+    },
+
+    {
+        username = 'maria',
+        password = '1234'
+    }
+}
+\end{lstlisting}\\\\
+
+The bootstrap.lua file contains code that the user may wish to be executed before running their tests. It is useful, for example, to load the fixtures:\\
+
+\begin{lstlisting}[frame=single]
+--/tests/bootstrap.lua
+...
+local t = require "sailor.test"
+t.load_fixtures('user') 
+\end{lstlisting}\\\\
+
+The helper.lua file should be used to write functions that will be shared among different tests, like a helper library.\\
+
+The unit/ directory will contain the unit tests files. The test scripts must follow a format specified by Busted. More features and details can be found at Bustedâ€™s website. A basic flow includes calling a describe function passing a description and a callback function that calls one or more it functions tests, also with a description and a callback containing specific tests and assertions. A very simple test could be written as follow:\\
+
+\begin{lstlisting}[frame=single]
+ -- /tests/unit/user_test.lua 
+describe("Testing User model", function()
+    local User = sailor.model('user')
+    local fixtures = require "tests.fixtures.user"     
+
+    it("should create a new user", function()
+        local count_before = User:count() 
+        -- Counting current users
+        local u = User:new(fixtures[1])   
+        -- Creating one more user with one of the fixtures
+        assert.is_true(u:save(false))    
+        -- Asserting that it saves
+        assert.is_equal(User:count(),count_before+1)
+        -- Asserting that the count increases by one
+    end)
+    -- ... more tests
+end)
+\end{lstlisting}\\\\
+
+The functional/ directory contains functional tests. They must follow the same format specified by Busted as the unit tests. Here is an example of a functional test script, containing two tests and four assertions, using Sailor:\\
+
+\begin{lstlisting}[frame=single]
+-- /tests/functional/user_controller_test.lua 
+describe("Testing User Controller", function()
+    local User = sailor.model('user')
+    local test = require "sailor.test"
+    local form = require "sailor.form"
+    local fixtures = require "tests.fixtures.user"
+
+    it("should open index", function()
+        local res = test.request('user/index') 
+        -- Getting the response a mock request to 
+        --  the index of the controller
+        assert.same(200,res.status)       
+        -- Asserting that the status of the response is ok
+        assert.truthy(res.body:match('View all'))  
+        -- Asserting that the page contains a string 'View all'
+    end)
+
+    it("should create a new user", function()
+        local count_before = User:count()    
+        -- Counting current users
+        local res = test.request(
+        	  'user/create', 
+        	  {post = form.ify(fixtures[1])}
+        	) 
+        -- Posting some user to the 'user/create' page of your app
+        assert.same(Category:count(), count_before + 1)   
+        -- Asserting that the number of users increased by 1
+        assert.is_true(res:redirected('user/index'))  
+        -- Asserting that the page redirected you to the index
+    end)
+end)
+\end{lstlisting}\\
+
+\subsubsection{Running tests}
+
+To run tests all that's needed to be done is to go to the app's directory and type sailor test or sailor t on command line. It is also possible to pass some flags that are accepted by Busted.\\
+
+Example:
+\begin{lstlisting}[frame=single]
+cd my_app
+sailor test --verbose
+\end{lstlisting}\\
+
+There should be an output like this:
+\begin{lstlisting}[frame=single]
+************************
+24 successes / 0 failures / 0 errors / 0 pending : 0.04076 seconds
+\end{lstlisting}
+
+
+
+
+
 
 	\newpage
 
