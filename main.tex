@@ -11,7 +11,8 @@
 \usepackage{hyperref} 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{lmodern} 
+\usepackage{lmodern}
+\usepackage{pdfpages} 
 \bibliography{main} 
 \begin{document}
 	\pagenumbering{gobble}
@@ -170,7 +171,13 @@ LabLua proposed the following list of ideas to GSoC:
 
 They received in total 6 slots, from which, four of them were filled by students working on ideas 2, 3, 7 and 13 and two of them were ideas proposed by students themselves. One of the student-proposed ideas was my project to improve Sailor, a web development framework I had been developing on my free time. \\
 
-The project was mentored by Dr. Fabio Mascarenhas, professor at Universidade Federal do Rio de Janeiro. Since Google did not provide for office space or work placement, ENSTA Bretagne offered a placement during the summer to work on this project under the supervision of Professor Dr. Olivier Reynet. \\
+The project was mentored by Dr. Fabio Mascarenhas, professor at Universidade Federal do Rio de Janeiro. 
+
+\subsection{ENSTA Bretagne}
+
+The École Nationale Supérieure de Techniques Avancées (ENSTA) Bretagne, formerly ENSIETA, is a higher education institution and research center in Brest, France. ENSTA Bretagne runs under the supervision of the French ministry of defence that takes both military and civilian students. \\
+
+Google Summer of Code takes place completely online. Since Google did not provide for office space or work placement, ENSTA Bretagne offered a placement during the summer to work on this project under the supervision of Professor Dr. Olivier Reynet. This allowed me to do my required summer internship while being financed by Google, which was essential for my permanence as a student at the last year of their integrated Masters formation. Having a work address during the summer was also important for my legal status in France during this period.\\
 
 \subsection{The Lua programming language}
 
@@ -180,15 +187,15 @@ This description provided by lua.org does not fully grasp what's interesting abo
 
 It's possible to have an idea about the simplicity of this language just by comparing the brevity of the Programming in Lua book versus books on pretty much any other language. This means you can have all of the language in your head. Its source code is also very succinct. As of version 5.3.1, described in about 23000 lines of Standard C, the whole distribution which includes documentation has only 276Kb. This allows easily porting Lua code to things that run standard ANSI C, even if they have typically low resources, and embedding Lua to applications without bloating them. The result is that Lua is a very widely used language, from micro controllers and washing machines to operating systems, power computers and video games.\\
 
-Its power can be observed on its multi-paradigm extensible semantics and speed. For example, while Lua does not come with Object Oriented Programming out of the box, it is possible to prototype it using first class functions \footnote{Support of passing functions as arguments to other functions, returning them as the values from other functions, and assigning them to variables or storing them in data structures. \autocite{wikifunc}} and metatables \footnote{Allows to change the behavior of a table. It is part of an extension mechanism which allows you to overload certain operations on Lua objects. \autocite{luausersmeta} \autocite[117]{pil}}. Lua also performs way better than other popular programming languages on speed tests. A special dialect of Lua called LuaJIT is the fastest it can get while still being a dynamically typed scripting language\autocite[8]{modlua}: \\
+Its power can be observed on its multi-paradigm extensible semantics and speed. For example, while Lua does not come with Object Oriented Programming out of the box, it is possible to prototype it using first class functions \footnote{Support of passing functions as arguments to other functions, returning them as the values from other functions, and assigning them to variables or storing them in data structures. \autocite{wikifunc}} and metatables \footnote{Allows to change the behavior of a table. It is part of an extension mechanism which allows you to overload certain operations on Lua objects. \autocite{luausersmeta} \autocite[117]{pil}}. Lua also performs way better than other popular programming languages on speed tests. A special dialect of Lua called LuaJIT is the fastest it can get while still being a dynamically typed scripting language\autocite[8]{modlua} producing results that are on average better than Javascript v8: \\
 
-%\clearpage
+\clearpage
 \begin{figure}[h]
 \includegraphics[scale=0.4]{speed.png}
-\caption{\label{fig:speedcomparison} Speed comparison of popular languages (less is better)}
+\caption{\label{fig:speedcomparison} Speed comparison of popular languages on various algorithms (less is better)}
 \end{figure}
 
-	\newpage
+\newpage
 \section{Analysis of the problem}
 
 Lua is greatly used as an embedded language and has found a niche in game development being the top language of choice for scripting in this area\autocite{engine}. In the same time, it is still a great tool as a general purpose language but not much widespread in other domains such as web development. As of September 26th of 2015 Lua is used in less than 0.1\% of websites whose server-side programming language we know\autocite{w3server}. \\
@@ -738,7 +745,15 @@ Sailor's website, documentation, extension repository and reference manual can b
 
 From a project's perspective, the results obtained during this summer's developments brought a considerable improvement to Sailor applications. Not only applications will now have a higher quality since they can be automatically tested, but also users comfortable with Lua may use it instead of JavaScript without loss of features.\\
 
-In relation to the career gain as a student, the project was also a success. It greatly enlarged my knowledge of software testing practices, improved my programming abilities and brought me more experience on working with open source, which included my first legal issue on this matter. One of the key aspects of Sailor is that it is open source, and so I had to carefully study license issues and its relation to laws of intellectual property in France to ensure that the MIT license was maintained safely. \\
+In relation to the career gain as a student, the project was also a success. Besides being financially attractive, it greatly enlarged my knowledge of software testing practices, improved my programming abilities and brought me more experience on working with open source, which included my first legal issue on this matter. One of the key aspects of Sailor is that it is open source, and so I had to carefully study license issues and its relation to laws of intellectual property in France to ensure that the MIT license was maintained safely. This was resolved by adding an additional clause to the internship convention. \\
+
+This project also brought more traction to Sailor, as expected. New contributors made patches to the repository and I was invited to give a talk about Sailor at a conference called codetalks in Hamburg. It was amazing to talk more about Lua, which is a fantastic language, and get the audience excited about it. \\
+
+\begin{figure}[h]
+\centering\includegraphics[scale=0.36]{codetalks.jpg}
+\caption{\label{fig:codetalks} Lecture at codetalks 2015, Hamburg: Web development in Lua - Introducing Sailor, a Lua MVC framework}
+\end{figure}
+
 
 Other interesting aspects were the responsibility of managing the project development. Even under one mentor and one supervisor who were offering technical and administrative assistance, Sailor was still my project and my responsibility. I had to make design decisions, carefully enumerate all tasks, estimate duration for completion and, the hardest, have the discipline to organize myself on my own time schedule. The fact that Sailor is a serious project for use on the real world also implies that I needed to take care of even broader functions, such as writing documentation, interacting with announcements on social medias and providing user support. This means that the maturity Sailor gained as a project during the summer directly reflected on the maturity I gained as a developer during the same period.\\
 
@@ -763,6 +778,12 @@ This report was composed with LaTeX and the source code to this report can be fo
 	 \listoffigures
 	 % \addcontentsline{toc}{subsection}{List of Tables}
   \listoftables
+
+
+
+\includepdf[pages={1,2,3,4}]{convention.pdf}
+\includepdf[pages={1,2}]{assessment.pdf}
+
 	\end{appendix}
 
 \end{document}
